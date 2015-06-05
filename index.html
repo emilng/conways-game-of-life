@@ -3,7 +3,13 @@
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-    <canvas id="js-stage" width="300" height="300" />
+    <div id="controls">
+      <div class="slider"><label>width</label><input id="js-width-range" type="range" /><input id="js-width-number" type="number" /></div>
+      <div class="slider"><label>height</label><input id="js-height-range" type="range" /><input id="js-height-number" type="number" /></div>
+      <div class="slider"><label>cell size</label><input id="js-cell-size-range" type="range" /><input id="js-cell-size-number" type="number" /></div>
+      <div class="slider"><label>refresh rate</label><input id="js-refresh-rate-range" type="range" /><input id="js-refresh-rate-number" type="number" /></div>
+    </div>
+    <canvas id="js-stage" width="200" height="200" />
 		<script type="text/javascript" src="main.js"></script>
 	</body>
 </html>
