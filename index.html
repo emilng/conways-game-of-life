@@ -4,10 +4,39 @@
   </head>
   <body>
     <div id="controls">
-      <div class="slider"><label>width</label><input id="js-width-range" type="range" /><input id="js-width-number" type="number" /></div>
-      <div class="slider"><label>height</label><input id="js-height-range" type="range" /><input id="js-height-number" type="number" /></div>
-      <div class="slider"><label>cell size</label><input id="js-cell-size-range" type="range" /><input id="js-cell-size-number" type="number" /></div>
-      <div class="slider"><label>refresh rate</label><input id="js-refresh-rate-range" type="range" /><input id="js-refresh-rate-number" type="number" /></div>
+      <div class="slider">
+        <div class="slider-label">
+          <label>width</label>
+        </div>
+        <input id="js-width-range" type="range" />
+        <div class="slider-display" id="js-width-display"></div>
+      </div>
+      <div class="slider">
+        <div class="slider-label">
+          <label>height</label>
+        </div>
+        <input id="js-height-range" type="range" />
+        <div class="slider-display" id="js-height-display"></div>
+      </div>
+      <div class="slider">
+        <div class="slider-label">
+          <label>cell size</label>
+        </div>
+        <input id="js-cell-size-range" type="range" />
+        <div class="slider-display" id="js-cell-size-display"></div>
+      </div>
+      <div class="slider">
+        <div class="slider-label">
+          <label>+</label>
+        </div>
+        <input id="js-cell-and-refresh-range" type="range" /></div>
+      <div class="slider">
+        <div class="slider-label">
+          <label>refresh rate</label>
+        </div>
+        <input id="js-refresh-rate-range" type="range" />
+        <div class="slider-display" id="js-refresh-rate-display"></div>
+      </div>
     </div>
     <canvas id="js-stage" width="200" height="200" />
 		<script type="text/javascript" src="main.js"></script>

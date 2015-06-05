@@ -6,3 +6,16 @@ canvas {
     image-rendering: pixelated;
     -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
 }
+
+.slider-label {
+  display: inline-block;
+  font-family: sans-serif;
+  text-align: right;
+  width: 90px;
+  margin-right: 10px;
+}
+
+.slider-display {
+  display: inline-block;
+  font-family: sans-serif;
+}

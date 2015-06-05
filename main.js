@@ -52,37 +52,53 @@ var init = function(data) {
   data.bst = getBitsSetTable();
 };
 
+var initSlider = function(id, value, min, max) {
+  var slider = document.getElementById(id);
+  slider.value = value;
+  slider.min = min;
+  slider.max = max;
+  return slider;
+};
+
+var initDisplay = function(id, value) {
+  var display = document.getElementById(id);
+  display.textContent = value;
+  return display;
+};
+
 var initUI = function(data) {
-  var widthRange = document.getElementById('js-width-range');
-  var heightRange = document.getElementById('js-height-range');
-  var cellSizeRange = document.getElementById('js-cell-size-range');
-  var refreshRateRange = document.getElementById('js-refresh-rate-range');
-  widthRange.min = 10;
-  widthRange.max = 600;
-  widthRange.value = data.canvas.width;
+  var widthRange = initSlider('js-width-range', data.canvas.width, 10, 600);
+  var widthDisplay = initDisplay('js-width-display', data.canvas.width);
+  var heightRange = initSlider('js-height-range', data.canvas.height, 10, 600);
+  var heightDisplay = initDisplay('js-height-display', data.canvas.height);
+  var cellSizeRange = initSlider('js-cell-size-range', 1, 1, 20);
+  var cellSizeDisplay = initDisplay('js-cell-size-display', 1);
+  var refreshRateRange = initSlider('js-refresh-rate-range', 1, 1, 1000);
+  var refreshRateDisplay = initDisplay('js-refresh-rate-display', 1);
+  var cellAndRefreshRange = initSlider('js-cell-and-refresh-range', 1, 1, 100);
+
   widthRange.addEventListener('input', function(e) {
     data.scaledWidth = e.target.value;
+    widthDisplay.textContent = data.scaledWidth;
     data.canvas.style.width = data.scaledWidth;
     data.width = Math.max(1, data.scaledWidth / data.cellSize);
     data.widthUpdated = true;
     data.updated = true;
   });
-  heightRange.min = 10;
-  heightRange.max = 600;
-  heightRange.value = data.canvas.height;
+
   heightRange.addEventListener('input', function(e) {
     data.scaledHeight = parseInt(e.target.value, 10);
+    heightDisplay.textContent = data.scaledHeight;
     data.canvas.style.height = data.scaledHeight;
     data.height = Math.max(1, data.scaledHeight / data.cellSize);
     data.heightUpdated = true;
     data.updated = true;
   });
-  cellSizeRange.min = 1;
-  cellSizeRange.max = 20;
-  cellSizeRange.value = 1;
-  cellSizeRange.addEventListener('input', function(e) {
-    var cellSize = parseInt(e.target.value, 10);
+
+  cellSizeDisplay.textContent = 1;
+  var updateCellSize = function(cellSize) {
     data.cellSize = cellSize;
+    cellSizeDisplay.textContent = cellSize;
     data.canvas.style.width = data.scaledWidth;
     data.canvas.style.height = data.scaledHeight;
     data.width = Math.max(1, data.scaledWidth / cellSize);
@@ -90,12 +106,27 @@ var initUI = function(data) {
     data.widthUpdated = true;
     data.heightUpdated = true;
     data.updated = true;
+  };
+  cellSizeRange.addEventListener('input', function(e) {
+    updateCellSize(parseInt(e.target.value, 10));
   });
-  refreshRateRange.min = 1;
-  refreshRateRange.max = 1000;
-  refreshRateRange.value = 1;
+
+  var updateRefreshRate = function(refreshRate) {
+    data.refreshRate = refreshRate;
+    refreshRateDisplay.textContent = refreshRate;
+  };
   refreshRateRange.addEventListener('input', function(e) {
-    data.refreshRate = parseInt(e.target.value, 10);
+    updateRefreshRate(parseInt(e.target.value, 10));
+  });
+
+  cellAndRefreshRange.addEventListener('input', function(e) {
+    var ratio = parseInt(e.target.value, 10) / 100;
+    var cellSize = Math.ceil(ratio * cellSizeRange.max);
+    cellSizeRange.value = cellSize;
+    updateCellSize(cellSize);
+    var refreshRate = Math.ceil(ratio * refreshRateRange.max);
+    updateRefreshRate(refreshRate);
+    refreshRateRange.value = refreshRate;
   });
 };
 
