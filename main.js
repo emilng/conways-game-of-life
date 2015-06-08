@@ -30,7 +30,8 @@ var data = {
   updated: true,
   widthUpdated: false,
   heightUpdated: false,
-  previousTime: 0
+  previousTime: 0,
+  playing: true
 };
 
 var randomizeBitmap = function(data) {
@@ -154,6 +155,17 @@ var initUI = function(data) {
 
   updateCellSize(data.cellSize);
   updateRefreshRate(data.refreshRate);
+
+  var randomizeButton = document.getElementById('js-randomize-btn');
+  randomizeButton.addEventListener('click', function() {
+    randomizeBitmap(data);
+  });
+
+  var pauseButton = document.getElementById('js-pause-btn');
+  pauseButton.addEventListener('click', function() {
+    data.playing = !data.playing;
+    pauseButton.textContent = (data.playing) ? 'Pause' : 'Play';
+  });
 };
 
 var updateData = function(data) {
@@ -272,15 +284,17 @@ var render = function(data) {
 var getUpdateHandler = function(data) {
 
   var update = function() {
-    if (data.updated) {
-      data.updated = false;
-      updateData(data);
-      render(data);
-    } else {
-      var currentTime = new Date().getTime();
-      if (currentTime - data.previousTime > data.refreshRate) {
+    if (data.playing) {
+      if (data.updated) {
+        data.updated = false;
+        updateData(data);
         render(data);
-        data.previousTime = currentTime;
+      } else {
+        var currentTime = new Date().getTime();
+        if (currentTime - data.previousTime > data.refreshRate) {
+          render(data);
+          data.previousTime = currentTime;
+        }
       }
     }
 
