@@ -1,13 +1,21 @@
 
+/*
+reset button
+choose reasonable starting values
+link to description or wikipedia article
+favicon - http://realfavicongenerator.net/
+follow, tweet, github star, fork
+*/
+
 var data = {
   canvas: null,
   ctx: null,
   width: null,
   height: null,
-  scaledWidth: 200,
-  scaledHeight: 200,
-  cellSize: 1,
-  refreshRate: 1,
+  scaledWidth: 400,
+  scaledHeight: 400,
+  cellSize: 4,
+  refreshRate: 120,
   imageData: null,
   buf: null,
   buf8: null,
@@ -50,6 +58,8 @@ var init = function(data) {
   data.canvas = document.getElementById('js-stage');
   data.ctx = data.canvas.getContext('2d');
   data.bst = getBitsSetTable();
+  data.width = data.scaledWidth / data.cellSize;
+  data.height = data.scaledHeight / data.cellSize;
 };
 
 var initSlider = function(id, value, min, max) {
@@ -67,14 +77,14 @@ var initDisplay = function(id, value) {
 };
 
 var initUI = function(data) {
-  var widthRange = initSlider('js-width-range', data.canvas.width, 10, 600);
+  var widthRange = initSlider('js-width-range', data.canvas.width, 10, 800);
   var widthDisplay = initDisplay('js-width-display', data.canvas.width);
   var heightRange = initSlider('js-height-range', data.canvas.height, 10, 600);
   var heightDisplay = initDisplay('js-height-display', data.canvas.height);
-  var cellSizeRange = initSlider('js-cell-size-range', 1, 1, 20);
-  var cellSizeDisplay = initDisplay('js-cell-size-display', 1);
-  var refreshRateRange = initSlider('js-refresh-rate-range', 1, 1, 1000);
-  var refreshRateDisplay = initDisplay('js-refresh-rate-display', 1);
+  var cellSizeRange = initSlider('js-cell-size-range', data.cellSize, 1, 20);
+  var cellSizeDisplay = initDisplay('js-cell-size-display', data.cellSize);
+  var refreshRateRange = initSlider('js-refresh-rate-range', data.refreshRate, 1, 1000);
+  var refreshRateDisplay = initDisplay('js-refresh-rate-display', data.refreshRate);
   var cellAndRefreshRange = initSlider('js-cell-and-refresh-range', 1, 1, 100);
   var cellUnits = document.getElementById('js-cell-units');
   var refreshUnits = document.getElementById('js-refresh-units');
@@ -107,7 +117,6 @@ var initUI = function(data) {
     data.updated = true;
   });
 
-  cellSizeDisplay.textContent = 1;
   var updateCellSize = function(cellSize) {
     data.cellSize = cellSize;
     cellSizeDisplay.textContent = cellSize;
@@ -142,6 +151,9 @@ var initUI = function(data) {
     updateRefreshRate(refreshRate);
     refreshRateRange.value = refreshRate;
   });
+
+  updateCellSize(data.cellSize);
+  updateRefreshRate(data.refreshRate);
 };
 
 var updateData = function(data) {
