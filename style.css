@@ -1,3 +1,10 @@
+body {
+  font-family: sans-serif;
+  background-color: #fff;
+  background: radial-gradient(#fff 60%, #eee);
+  margin: 0;
+}
+
 /* keep canvas pixelated */
 canvas {
     image-rendering: -moz-crisp-edges;         /* Firefox */
@@ -7,9 +14,123 @@ canvas {
     -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
 }
 
+input[type=range] {
+  -webkit-appearance: none;
+  width: 150px;
+  margin: 3.3px 0;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 150px;
+  height: 6px;
+  cursor: pointer;
+  box-shadow: 0px 0px 1px #666, 0px 0px 0px #a6a6a6;
+  background: #ffffff;
+  border-radius: 1.3px;
+  border: 0.1px solid #000000;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 1px solid #999999;
+  height: 15px;
+  width: 15px;
+  border-radius: 2px;
+  background: #ffffff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -3.4px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #ffffff;
+}
+input[type=range]::-moz-range-track {
+  width: 150px;
+  height: 6px;
+  cursor: pointer;
+  box-shadow: 0px 0px 1px #666, 0px 0px 0px #a6a6a6;
+  background: #ffffff;
+  border-radius: 1.3px;
+  border: 0.1px solid #000000;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 1px solid #999999;
+  height: 15px;
+  width: 15px;
+  border-radius: 2px;
+  background: #ffffff;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 150px;
+  height: 6px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #f2f2f2;
+  border: 0.1px solid #000000;
+  border-radius: 2.6px;
+  box-shadow: 0px 0px 1px #999999, 0px 0px 0px #a6a6a6;
+}
+input[type=range]::-ms-fill-upper {
+  background: #ffffff;
+  border: 0.1px solid #000000;
+  border-radius: 2.6px;
+  box-shadow: 0px 0px 1px #999999, 0px 0px 0px #a6a6a6;
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 1px solid #999999;
+  height: 15px;
+  width: 15px;
+  border-radius: 2px;
+  background: #ffffff;
+  cursor: pointer;
+  height: 8.4px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #ffffff;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #ffffff;
+}
+
+
+.controls {
+  background-color: #fff;
+  border-width: 0 1px 1px 1px;
+  border-style: solid;
+  border-color: #ddd;
+  border-radius: 0 0 10px 10px;
+  width: 390px;
+  margin: 0 0 20px 0;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.title {
+  margin: 5px 0 15px 0;
+  padding: 0;
+  text-align: center;
+  font-size: 1.3em;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+.ui {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .slider-label {
   display: inline-block;
-  font-family: sans-serif;
   text-align: right;
   width: 90px;
   margin-right: 10px;
@@ -17,5 +138,4 @@ canvas {
 
 .slider-display {
   display: inline-block;
-  font-family: sans-serif;
 }
