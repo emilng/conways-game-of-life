@@ -3,42 +3,45 @@
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-    <div id="controls">
-      <div class="slider">
-        <div class="slider-label">
-          <label>width</label>
+    <div class="ui">
+      <div class="controls">
+        <div class="title">Conway's Game of Life</div>
+        <div class="slider">
+          <div class="slider-label">
+            <label>width</label>
+          </div>
+          <input id="js-width-range" type="range" />
+          <div class="slider-display" id="js-width-display"></div> pixels
         </div>
-        <input id="js-width-range" type="range" />
-        <div class="slider-display" id="js-width-display"></div>
+        <div class="slider">
+          <div class="slider-label">
+            <label>height</label>
+          </div>
+          <input id="js-height-range" type="range" />
+          <div class="slider-display" id="js-height-display"></div> pixels
+        </div>
+        <div class="slider">
+          <div class="slider-label">
+            <label>cell size</label>
+          </div>
+          <input id="js-cell-size-range" type="range" />
+          <div class="slider-display" id="js-cell-size-display"></div><span id="js-cell-units"> pixels</span>
+        </div>
+        <div class="slider">
+          <div class="slider-label">
+            <label>+</label>
+          </div>
+          <input id="js-cell-and-refresh-range" type="range" /></div>
+        <div class="slider">
+          <div class="slider-label">
+            <label>refresh rate</label>
+          </div>
+          <input id="js-refresh-rate-range" type="range" />
+          <div class="slider-display" id="js-refresh-rate-display"></div><span id="js-refresh-units"> milliseconds</span>
+        </div>
       </div>
-      <div class="slider">
-        <div class="slider-label">
-          <label>height</label>
-        </div>
-        <input id="js-height-range" type="range" />
-        <div class="slider-display" id="js-height-display"></div>
-      </div>
-      <div class="slider">
-        <div class="slider-label">
-          <label>cell size</label>
-        </div>
-        <input id="js-cell-size-range" type="range" />
-        <div class="slider-display" id="js-cell-size-display"></div>
-      </div>
-      <div class="slider">
-        <div class="slider-label">
-          <label>+</label>
-        </div>
-        <input id="js-cell-and-refresh-range" type="range" /></div>
-      <div class="slider">
-        <div class="slider-label">
-          <label>refresh rate</label>
-        </div>
-        <input id="js-refresh-rate-range" type="range" />
-        <div class="slider-display" id="js-refresh-rate-display"></div>
-      </div>
+      <canvas id="js-stage" width="200" height="200" />
     </div>
-    <canvas id="js-stage" width="200" height="200" />
 		<script type="text/javascript" src="main.js"></script>
 	</body>
 </html>

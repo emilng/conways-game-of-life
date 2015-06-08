@@ -18,7 +18,7 @@ var data = {
   bmpNext: null,
   bst: null,
   on: 0xff000000,
-  off: 0xffffffff,
+  off: 0x00ffffff,
   updated: true,
   widthUpdated: false,
   heightUpdated: false,
@@ -76,6 +76,18 @@ var initUI = function(data) {
   var refreshRateRange = initSlider('js-refresh-rate-range', 1, 1, 1000);
   var refreshRateDisplay = initDisplay('js-refresh-rate-display', 1);
   var cellAndRefreshRange = initSlider('js-cell-and-refresh-range', 1, 1, 100);
+  var cellUnits = document.getElementById('js-cell-units');
+  var refreshUnits = document.getElementById('js-refresh-units');
+
+  var pluralize = function(number, container) {
+    var text = container.textContent;
+    var endsWithS = (text[text.length - 1] === 's');
+    if ((number === 1) && (endsWithS === true)) {
+      container.textContent = text.substr(0, text.length - 1);
+    } else if (endsWithS === false) {
+      container.textContent = text + 's';
+    }
+  };
 
   widthRange.addEventListener('input', function(e) {
     data.scaledWidth = e.target.value;
@@ -106,6 +118,7 @@ var initUI = function(data) {
     data.widthUpdated = true;
     data.heightUpdated = true;
     data.updated = true;
+    pluralize(cellSize, cellUnits);
   };
   cellSizeRange.addEventListener('input', function(e) {
     updateCellSize(parseInt(e.target.value, 10));
@@ -114,6 +127,7 @@ var initUI = function(data) {
   var updateRefreshRate = function(refreshRate) {
     data.refreshRate = refreshRate;
     refreshRateDisplay.textContent = refreshRate;
+    pluralize(refreshRate, refreshUnits);
   };
   refreshRateRange.addEventListener('input', function(e) {
     updateRefreshRate(parseInt(e.target.value, 10));
