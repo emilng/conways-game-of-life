@@ -1,12 +1,4 @@
 
-/*
-reset button
-choose reasonable starting values
-link to description or wikipedia article
-favicon - http://realfavicongenerator.net/
-follow, tweet, github star, fork
-*/
-
 var data = {
   canvas: null,
   ctx: null,
